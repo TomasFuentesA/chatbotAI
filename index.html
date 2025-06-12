@@ -4,16 +4,16 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>PokéProfessor - Professor Oak AI</title>
+    <title>DungeonMaster AI - Your Virtual Dungeon Master</title>
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;700;900&display=swap" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css2?family=UnifrakturCook:wght@700&family=IM+Fell+English+SC&family=Inter:wght@400;700&display=swap" rel="stylesheet">
     <style>
         body {
             margin: 0;
-            font-family: 'Inter', Arial, sans-serif;
-            background: linear-gradient(135deg, #fff6f6 0%, #fff 100%);
-            color: #0a0a23;
+            font-family: 'IM Fell English SC', 'Inter', serif;
+            background: linear-gradient(135deg, #3e2723 0%, #fff8e1 100%);
+            color: #2d1606;
         }
 
         .header {
@@ -21,26 +21,35 @@
             align-items: center;
             justify-content: space-between;
             padding: 24px 48px 16px 48px;
-            background: #fff;
-            box-shadow: 0 2px 8px rgba(0, 0, 0, 0.02);
+            background: #6d4c41;
+            box-shadow: 0 2px 8px rgba(0, 0, 0, 0.15);
         }
 
         .logo {
             display: flex;
             align-items: center;
+            font-family: 'UnifrakturCook', cursive;
             font-weight: 700;
-            font-size: 1.5rem;
-            color: #0a0a23;
+            font-size: 2rem;
+            color: #ffd700;
             text-decoration: none;
+            letter-spacing: 2px;
+            text-shadow: 2px 2px 0 #2d1606;
         }
 
-        .logo-dot {
-            width: 28px;
-            height: 28px;
-            background: #ef4444;
-            border-radius: 50%;
-            margin-right: 12px;
-            display: inline-block;
+        .logo-shield {
+            width: 32px;
+            height: 32px;
+            background: #ffd700;
+            border-radius: 6px 6px 12px 12px;
+            margin-right: 14px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            border: 2px solid #2d1606;
+            box-shadow: 0 2px 6px #2d1606aa;
+            font-size: 1.3rem;
+            color: #6d4c41;
         }
 
         .nav {
@@ -51,30 +60,37 @@
 
         .nav a {
             text-decoration: none;
-            color: #0a0a23;
-            font-weight: 500;
-            font-size: 1rem;
+            color: #ffd700;
+            font-family: 'IM Fell English SC', serif;
+            font-size: 1.1rem;
+            font-weight: 700;
+            letter-spacing: 1px;
             transition: color 0.2s;
+            text-shadow: 1px 1px 0 #2d1606;
         }
 
         .nav a:hover {
-            color: #ef4444;
+            color: #fff8e1;
         }
 
         .start-btn {
-            background: #ef4444;
-            color: #fff;
-            border: none;
-            border-radius: 8px;
-            padding: 12px 24px;
-            font-size: 1rem;
+            background: linear-gradient(90deg, #b71c1c 0%, #ffd700 100%);
+            color: #2d1606;
+            border: 2px solid #ffd700;
+            border-radius: 10px;
+            padding: 12px 28px;
+            font-size: 1.1rem;
+            font-family: 'IM Fell English SC', serif;
             font-weight: 700;
             cursor: pointer;
-            transition: background 0.2s;
+            box-shadow: 0 2px 8px #2d160633;
+            transition: background 0.2s, color 0.2s;
+            text-shadow: 1px 1px 0 #ffd70099;
         }
 
         .start-btn:hover {
-            background: #d32f2f;
+            background: linear-gradient(90deg, #ffd700 0%, #b71c1c 100%);
+            color: #fff8e1;
         }
 
         .main {
@@ -87,34 +103,46 @@
         }
 
         .hero-text {
-            max-width: 520px;
+            max-width: 540px;
             margin-right: 48px;
             margin-left: 32px;
         }
 
         .badge {
             display: inline-block;
-            background: #ffe4e4;
-            color: #ef4444;
-            font-size: 1rem;
-            padding: 6px 18px;
-            border-radius: 16px;
+            background: #ffd700;
+            color: #6d4c41;
+            font-size: 1.1rem;
+            padding: 7px 22px;
+            border-radius: 18px;
             margin-bottom: 18px;
-            font-weight: 500;
+            font-family: 'IM Fell English SC', serif;
+            font-weight: 700;
+            letter-spacing: 1px;
+            box-shadow: 0 1px 4px #2d1606aa;
         }
 
         .hero-title {
-            font-size: 3rem;
-            font-weight: 900;
-            margin: 0 0 12px 0;
+            font-size: 2.7rem;
+            font-family: 'UnifrakturCook', cursive;
+            font-weight: 700;
+            margin: 0 0 14px 0;
             line-height: 1.1;
+            color: #b71c1c;
+            text-shadow: 2px 2px 0 #ffd700;
         }
 
         .hero-desc {
-            font-size: 1.2rem;
+            font-size: 1.25rem;
             margin-bottom: 32px;
-            color: #444;
+            color: #2d1606;
+            font-family: 'IM Fell English SC', serif;
             font-weight: 400;
+            background: #fff8e1cc;
+            border-left: 4px solid #b71c1c;
+            padding: 16px 18px;
+            border-radius: 8px;
+            box-shadow: 0 1px 4px #2d1606aa;
         }
 
         .cta-group {
@@ -123,45 +151,51 @@
         }
 
         .learn-btn {
-            background: #fff;
-            color: #ef4444;
-            border: 2px solid #ef4444;
-            border-radius: 8px;
+            background: #fff8e1;
+            color: #b71c1c;
+            border: 2px solid #b71c1c;
+            border-radius: 10px;
             padding: 12px 24px;
-            font-size: 1rem;
+            font-size: 1.1rem;
+            font-family: 'IM Fell English SC', serif;
             font-weight: 700;
             cursor: pointer;
             transition: background 0.2s, color 0.2s;
+            box-shadow: 0 2px 8px #2d160633;
         }
 
         .learn-btn:hover {
-            background: #ffe4e4;
-            color: #d32f2f;
+            background: #b71c1c;
+            color: #ffd700;
         }
 
         .hero-image {
             width: 420px;
             height: 420px;
-            background: #ededed;
-            border-radius: 18px;
+            background: #fff8e1;
+            border: 4px solid #b71c1c;
+            border-radius: 22px;
             display: flex;
             align-items: center;
             justify-content: center;
             position: relative;
             margin-top: 24px;
             margin-bottom: 24px;
+            box-shadow: 0 4px 24px #2d1606aa;
         }
 
         .hero-image .img-placeholder {
-            width: 80px;
-            height: 80px;
+            width: 110px;
+            height: 110px;
             border-radius: 50%;
-            background: #e0e0e0;
+            background: #b71c1c;
             display: flex;
             align-items: center;
             justify-content: center;
-            font-size: 2.5rem;
-            color: #bbb;
+            font-size: 3.5rem;
+            color: #ffd700;
+            border: 4px solid #ffd700;
+            box-shadow: 0 2px 8px #2d1606aa;
         }
 
         .status-box {
@@ -169,23 +203,29 @@
             bottom: 24px;
             left: 50%;
             transform: translateX(-50%);
-            background: #fff;
-            box-shadow: 0 2px 12px rgba(0, 0, 0, 0.07);
+            background: #6d4c41;
+            box-shadow: 0 2px 12px rgba(0, 0, 0, 0.15);
             border-radius: 14px;
             padding: 12px 28px;
             display: flex;
             align-items: center;
             gap: 10px;
             font-size: 1.1rem;
-            font-weight: 500;
+            font-family: 'IM Fell English SC', serif;
+            font-weight: 700;
+            color: #ffd700;
+            border: 2px solid #ffd700;
+            text-shadow: 1px 1px 0 #2d1606;
         }
 
         .status-dot {
             width: 14px;
             height: 14px;
-            background: #4ade80;
+            background: #43a047;
             border-radius: 50%;
             display: inline-block;
+            border: 2px solid #ffd700;
+            margin-right: 4px;
         }
 
         @media (max-width: 1100px) {
@@ -213,7 +253,7 @@
             }
 
             .hero-title {
-                font-size: 2rem;
+                font-size: 1.5rem;
             }
 
             .hero-image {
@@ -226,34 +266,33 @@
 
 <body>
     <header class="header">
-        <a href="#" class="logo"><span class="logo-dot"></span>PokéProfessor</a>
+        <a href="#" class="logo"><span class="logo-shield">&#9876;</span>DungeonMaster AI</a>
         <nav class="nav">
             <a href="#features">Features</a>
             <a href="#demo">Demo</a>
             <a href="#faq">FAQ</a>
-            <button class="start-btn">Start Chatting</button>
+            <button class="start-btn">Begin Your Quest</button>
         </nav>
     </header>
     <main class="main">
         <section class="hero-text">
-            <div class="badge">Your Pokémon Research Assistant</div>
-            <h1 class="hero-title">Meet Professor Oak AI, Your Pokémon Expert</h1>
+            <div class="badge">Your Virtual Dungeon Master</div>
+            <h1 class="hero-title">Embark on Epic Adventures with DungeonMaster AI</h1>
             <div class="hero-desc">
-                Get instant answers to all your Pokémon questions from breeding to battling, from a chatbot with the
-                knowledge of a true Pokémon Professor.
+                Step into a world of fantasy! DungeonMaster AI is your ever-ready guide to thrilling quests, mysterious dungeons, and legendary tales. Whether you seek to craft a campaign, resolve a rule, or narrate a story, your AI Dungeon Master awaits to bring your tabletop RPG dreams to life.
             </div>
             <div class="cta-group">
-                <button class="start-btn">Start Chatting</button>
+                <button class="start-btn">Begin Your Quest</button>
                 <button class="learn-btn">Learn More</button>
             </div>
         </section>
         <section class="hero-image">
             <div class="img-placeholder">
-                <span>&#128247;</span>
+                <span title="Dungeon Master">&#9917;</span>
             </div>
             <div class="status-box">
                 <span class="status-dot"></span>
-                Professor Oak is online
+                Dungeon Master is online
             </div>
         </section>
     </main>

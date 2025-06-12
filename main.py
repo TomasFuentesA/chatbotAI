@@ -69,29 +69,26 @@ def gen_image(prompt, width=256, height=256):
 def bot_response_function(user_message, chat_history):
     # 1. YOUR CODE HERE - Add your external knowledge here
     external_knowledge = """
-    Pokemon is a Japanese media franchise created by Satoshi Tajiri. The franchise centers on fictional creatures called Pokemon, which humans known as Pokemon Trainers catch and train to battle each other for sport. The first Pokemon games, Pokemon Red and Green, were released in 1996. The franchise has since grown to become one of the highest-grossing media franchises in the world.
-
-    Key aspects of Pokemon:
-    - Pokemon can evolve into stronger forms
-    - Trainers aim to become Pokemon Masters
-    - Pokemon battles use turn-based combat
-    - There are 18 different Pokemon types
-    - Each Pokemon has unique moves and abilities
+    Dungeons and Dragons is a role-playing game where players create characters and explore a fantasy world.
+    The game is played with a group of players, each with a character.
+    The characters are controlled by the players, and the players are responsible for the actions of their characters.
+    The players are also responsible for the story of the game.
+    The players are also responsible for the world of the game.
+    The players are also responsible for the rules of the game.
+    The players are also responsible for the lore of the game.
     """
 
     # 2. YOUR CODE HERE -  Give the LLM a prompt to respond to the user
     chatbot_prompt = f"""
-    You are Professor Oak, a renowned Pokemon researcher. Always respond as Professor Oak would, with a friendly and mentoring tone, sharing your expertise about Pokemon. Use the following information as additional context for your responses:
+    You are a Dungeon Master for a Dungeons and Dragons game. You are responsible for the story of the game, the world of the game, and the rules of the game. Remember to be as detailed as possible and use the following information as additional context for your responses:
     
     {external_knowledge}
 
     Remember to:
-    - Introduce yourself as Professor Oak when appropriate
-    - Be enthusiastic about Pokemon research
-    - Share your knowledge in a way that's helpful to Pokemon trainers
-    - Maintain a warm and mentoring tone, like you do with new trainers
+        - Build the character based on the user's message
+        - And build the world based on the character created
     
-    Now, please respond to this message as Professor Oak:
+    Now, please respond to this message as a Dungeon Master:
     {user_message}
     """
 
