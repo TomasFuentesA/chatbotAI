@@ -1,0 +1,262 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>PokéProfessor - Professor Oak AI</title>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;700;900&display=swap" rel="stylesheet">
+    <style>
+        body {
+            margin: 0;
+            font-family: 'Inter', Arial, sans-serif;
+            background: linear-gradient(135deg, #fff6f6 0%, #fff 100%);
+            color: #0a0a23;
+        }
+
+        .header {
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+            padding: 24px 48px 16px 48px;
+            background: #fff;
+            box-shadow: 0 2px 8px rgba(0, 0, 0, 0.02);
+        }
+
+        .logo {
+            display: flex;
+            align-items: center;
+            font-weight: 700;
+            font-size: 1.5rem;
+            color: #0a0a23;
+            text-decoration: none;
+        }
+
+        .logo-dot {
+            width: 28px;
+            height: 28px;
+            background: #ef4444;
+            border-radius: 50%;
+            margin-right: 12px;
+            display: inline-block;
+        }
+
+        .nav {
+            display: flex;
+            gap: 32px;
+            align-items: center;
+        }
+
+        .nav a {
+            text-decoration: none;
+            color: #0a0a23;
+            font-weight: 500;
+            font-size: 1rem;
+            transition: color 0.2s;
+        }
+
+        .nav a:hover {
+            color: #ef4444;
+        }
+
+        .start-btn {
+            background: #ef4444;
+            color: #fff;
+            border: none;
+            border-radius: 8px;
+            padding: 12px 24px;
+            font-size: 1rem;
+            font-weight: 700;
+            cursor: pointer;
+            transition: background 0.2s;
+        }
+
+        .start-btn:hover {
+            background: #d32f2f;
+        }
+
+        .main {
+            display: flex;
+            flex-wrap: wrap;
+            align-items: flex-start;
+            justify-content: center;
+            padding: 48px 0 0 0;
+            min-height: 80vh;
+        }
+
+        .hero-text {
+            max-width: 520px;
+            margin-right: 48px;
+            margin-left: 32px;
+        }
+
+        .badge {
+            display: inline-block;
+            background: #ffe4e4;
+            color: #ef4444;
+            font-size: 1rem;
+            padding: 6px 18px;
+            border-radius: 16px;
+            margin-bottom: 18px;
+            font-weight: 500;
+        }
+
+        .hero-title {
+            font-size: 3rem;
+            font-weight: 900;
+            margin: 0 0 12px 0;
+            line-height: 1.1;
+        }
+
+        .hero-desc {
+            font-size: 1.2rem;
+            margin-bottom: 32px;
+            color: #444;
+            font-weight: 400;
+        }
+
+        .cta-group {
+            display: flex;
+            gap: 16px;
+        }
+
+        .learn-btn {
+            background: #fff;
+            color: #ef4444;
+            border: 2px solid #ef4444;
+            border-radius: 8px;
+            padding: 12px 24px;
+            font-size: 1rem;
+            font-weight: 700;
+            cursor: pointer;
+            transition: background 0.2s, color 0.2s;
+        }
+
+        .learn-btn:hover {
+            background: #ffe4e4;
+            color: #d32f2f;
+        }
+
+        .hero-image {
+            width: 420px;
+            height: 420px;
+            background: #ededed;
+            border-radius: 18px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            position: relative;
+            margin-top: 24px;
+            margin-bottom: 24px;
+        }
+
+        .hero-image .img-placeholder {
+            width: 80px;
+            height: 80px;
+            border-radius: 50%;
+            background: #e0e0e0;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 2.5rem;
+            color: #bbb;
+        }
+
+        .status-box {
+            position: absolute;
+            bottom: 24px;
+            left: 50%;
+            transform: translateX(-50%);
+            background: #fff;
+            box-shadow: 0 2px 12px rgba(0, 0, 0, 0.07);
+            border-radius: 14px;
+            padding: 12px 28px;
+            display: flex;
+            align-items: center;
+            gap: 10px;
+            font-size: 1.1rem;
+            font-weight: 500;
+        }
+
+        .status-dot {
+            width: 14px;
+            height: 14px;
+            background: #4ade80;
+            border-radius: 50%;
+            display: inline-block;
+        }
+
+        @media (max-width: 1100px) {
+            .main {
+                flex-direction: column;
+                align-items: center;
+            }
+
+            .hero-text {
+                margin-right: 0;
+                margin-bottom: 32px;
+                text-align: center;
+            }
+        }
+
+        @media (max-width: 600px) {
+            .header {
+                flex-direction: column;
+                gap: 12px;
+                padding: 18px 8px 10px 8px;
+            }
+
+            .main {
+                padding: 24px 0 0 0;
+            }
+
+            .hero-title {
+                font-size: 2rem;
+            }
+
+            .hero-image {
+                width: 90vw;
+                height: 220px;
+            }
+        }
+    </style>
+</head>
+
+<body>
+    <header class="header">
+        <a href="#" class="logo"><span class="logo-dot"></span>PokéProfessor</a>
+        <nav class="nav">
+            <a href="#features">Features</a>
+            <a href="#demo">Demo</a>
+            <a href="#faq">FAQ</a>
+            <button class="start-btn">Start Chatting</button>
+        </nav>
+    </header>
+    <main class="main">
+        <section class="hero-text">
+            <div class="badge">Your Pokémon Research Assistant</div>
+            <h1 class="hero-title">Meet Professor Oak AI, Your Pokémon Expert</h1>
+            <div class="hero-desc">
+                Get instant answers to all your Pokémon questions from breeding to battling, from a chatbot with the
+                knowledge of a true Pokémon Professor.
+            </div>
+            <div class="cta-group">
+                <button class="start-btn">Start Chatting</button>
+                <button class="learn-btn">Learn More</button>
+            </div>
+        </section>
+        <section class="hero-image">
+            <div class="img-placeholder">
+                <span>&#128247;</span>
+            </div>
+            <div class="status-box">
+                <span class="status-dot"></span>
+                Professor Oak is online
+            </div>
+        </section>
+    </main>
+</body>
+
+</html>
