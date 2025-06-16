@@ -1,37 +1,31 @@
-# D&D Character-Driven Chatbot
+# Machine Learning Assistant
 
-A dynamic text-based adventure game that brings your characters to life in a rich D&D-inspired world. Create your character through a simple text file input and embark on an epic journey filled with quests, battles, and character progression.
+A powerful AI assistant that combines natural language processing with practical machine learning capabilities. This project demonstrates the integration of conversational AI with Python/Streamlit to create an interactive machine learning experience.
 
 ## Features
 
-### Character Creation
-- Import character details from a text file
-- Customize your character's attributes, background, and personality
-- Seamless integration of character traits into the game world
+### Natural Language Processing
+- Convert natural language queries into actionable ML tasks
+- Intelligent command interpretation and execution
+- Context-aware conversation handling
 
-### Dynamic World Building
-- Procedurally generated D&D-style world
-- Rich lore and environment descriptions
-- Interactive NPCs with unique personalities and quests
+### Machine Learning Capabilities
+- Model training and evaluation
+- Data preprocessing and analysis
+- Performance metrics visualization
+- Automated model selection and tuning
 
-### Gameplay Elements
-- Turn-based combat system
-- Character progression and leveling
-- Experience points and skill development
-- Inventory management
-- Quest system with branching storylines
+### Interactive Interface
+- Streamlit-based user interface
+- Real-time data visualization
+- Interactive model training and testing
+- Clear result presentation and explanations
 
-### Combat System
-- Strategic turn-based battles
-- Various combat actions and abilities
-- Enemy AI with different behavior patterns
-- Loot and rewards system
-
-### Character Development
-- Level up system
-- Skill trees and character classes
-- Attribute progression
-- Equipment and gear management
+### Technical Features
+- Python-based ML pipeline integration
+- Modular architecture for easy extension
+- Comprehensive error handling
+- Efficient data processing
 
 ## Quick Start
 
@@ -50,11 +44,8 @@ source venv/bin/activate
 # Install dependencies
 pip install -r requirements.txt
 
-# Create a character file (example: my_character.txt)
-# See Character File Format section for details
-
 # Run the application
-python main.py --character my_character.txt
+streamlit run app.py
 ```
 
 ## Getting Started
@@ -66,30 +57,14 @@ python main.py --character my_character.txt
 ### Installation
 1. Clone the repository
 2. Install dependencies
-3. Prepare your character file
-4. Run the application
-
-## Character File Format
-Create a text file with your character's details in the following format:
-```
-Name: [Character Name]
-Class: [Character Class]
-Background: [Character Background]
-Attributes:
-  Strength: [value]
-  Dexterity: [value]
-  Constitution: [value]
-  Intelligence: [value]
-  Wisdom: [value]
-  Charisma: [value]
-```
+3. Run the application
 
 ## Usage
-1. Start the application
-2. Import your character file
-3. Begin your adventure!
-4. Interact with the world through text commands
-5. Complete quests and level up your character
+1. Start the application using Streamlit
+2. Interact with the assistant through natural language
+3. Upload or input your data
+4. Execute ML tasks through conversation
+5. View and analyze results through interactive visualizations
 
 ## Contributing
 Contributions are welcome! Please feel free to submit a Pull Request.
