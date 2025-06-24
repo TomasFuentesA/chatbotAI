@@ -4,261 +4,261 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>DungeonMaster AI - Your Virtual Dungeon Master</title>
+    <title>DS AI Assistant - Your Personal Data Science AI Assistant</title>
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-    <link href="https://fonts.googleapis.com/css2?family=UnifrakturCook:wght@700&family=IM+Fell+English+SC&family=Inter:wght@400;700&display=swap" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;700&display=swap" rel="stylesheet">
     <style>
         body {
             margin: 0;
-            font-family: 'IM Fell English SC', 'Inter', serif;
-            background: linear-gradient(135deg, #3e2723 0%, #fff8e1 100%);
-            color: #2d1606;
+            font-family: 'Inter', Arial, sans-serif;
+            background: #f4f8ff;
+            color: #222;
         }
 
         .header {
             display: flex;
             align-items: center;
             justify-content: space-between;
-            padding: 24px 48px 16px 48px;
-            background: #6d4c41;
-            box-shadow: 0 2px 8px rgba(0, 0, 0, 0.15);
+            padding: 18px 40px;
+            background: #fff;
+            box-shadow: 0 2px 8px rgba(0,0,0,0.04);
         }
 
         .logo {
             display: flex;
             align-items: center;
-            font-family: 'UnifrakturCook', cursive;
             font-weight: 700;
-            font-size: 2rem;
-            color: #ffd700;
+            font-size: 1.35rem;
+            color: #1a237e;
             text-decoration: none;
-            letter-spacing: 2px;
-            text-shadow: 2px 2px 0 #2d1606;
+            letter-spacing: 1px;
+            gap: 10px;
         }
 
-        .logo-shield {
-            width: 32px;
-            height: 32px;
-            background: #ffd700;
-            border-radius: 6px 6px 12px 12px;
-            margin-right: 14px;
-            display: flex;
-            align-items: center;
-            justify-content: center;
-            border: 2px solid #2d1606;
-            box-shadow: 0 2px 6px #2d1606aa;
-            font-size: 1.3rem;
-            color: #6d4c41;
+        .logo-icon {
+            font-size: 1.5rem;
+            color: #2962ff;
         }
 
         .nav {
             display: flex;
-            gap: 32px;
             align-items: center;
+            gap: 32px;
         }
 
         .nav a {
             text-decoration: none;
-            color: #ffd700;
-            font-family: 'IM Fell English SC', serif;
-            font-size: 1.1rem;
-            font-weight: 700;
-            letter-spacing: 1px;
+            color: #222;
+            font-size: 1rem;
+            font-weight: 500;
             transition: color 0.2s;
-            text-shadow: 1px 1px 0 #2d1606;
         }
 
         .nav a:hover {
-            color: #fff8e1;
+            color: #2962ff;
         }
 
         .start-btn {
-            background: linear-gradient(90deg, #b71c1c 0%, #ffd700 100%);
-            color: #2d1606;
-            border: 2px solid #ffd700;
-            border-radius: 10px;
-            padding: 12px 28px;
-            font-size: 1.1rem;
-            font-family: 'IM Fell English SC', serif;
+            background: #222;
+            color: #fff;
+            border: none;
+            border-radius: 7px;
+            padding: 10px 22px;
+            font-size: 1rem;
             font-weight: 700;
+            margin-left: 18px;
             cursor: pointer;
-            box-shadow: 0 2px 8px #2d160633;
             transition: background 0.2s, color 0.2s;
-            text-shadow: 1px 1px 0 #ffd70099;
         }
 
         .start-btn:hover {
-            background: linear-gradient(90deg, #ffd700 0%, #b71c1c 100%);
-            color: #fff8e1;
+            background: #2962ff;
+            color: #fff;
         }
 
         .main {
             display: flex;
-            flex-wrap: wrap;
-            align-items: flex-start;
+            flex-direction: column;
+            align-items: center;
             justify-content: center;
-            padding: 48px 0 0 0;
             min-height: 80vh;
-        }
-
-        .hero-text {
-            max-width: 540px;
-            margin-right: 48px;
-            margin-left: 32px;
+            padding: 0 16px;
+            background: #f4f8ff;
         }
 
         .badge {
             display: inline-block;
-            background: #ffd700;
-            color: #6d4c41;
-            font-size: 1.1rem;
-            padding: 7px 22px;
-            border-radius: 18px;
+            background: #e3edff;
+            color: #2962ff;
+            font-size: 1rem;
+            padding: 6px 18px;
+            border-radius: 16px;
             margin-bottom: 18px;
-            font-family: 'IM Fell English SC', serif;
-            font-weight: 700;
+            font-weight: 600;
             letter-spacing: 1px;
-            box-shadow: 0 1px 4px #2d1606aa;
         }
 
         .hero-title {
             font-size: 2.7rem;
-            font-family: 'UnifrakturCook', cursive;
-            font-weight: 700;
-            margin: 0 0 14px 0;
+            font-weight: 800;
+            margin: 0 0 16px 0;
             line-height: 1.1;
-            color: #b71c1c;
-            text-shadow: 2px 2px 0 #ffd700;
+            color: #222;
+        }
+
+        .hero-title .highlight {
+            color: #2962ff;
         }
 
         .hero-desc {
-            font-size: 1.25rem;
+            font-size: 1.2rem;
             margin-bottom: 32px;
-            color: #2d1606;
-            font-family: 'IM Fell English SC', serif;
-            font-weight: 400;
-            background: #fff8e1cc;
-            border-left: 4px solid #b71c1c;
-            padding: 16px 18px;
-            border-radius: 8px;
-            box-shadow: 0 1px 4px #2d1606aa;
+            color: #444;
+            max-width: 600px;
         }
 
         .cta-group {
             display: flex;
             gap: 16px;
+            margin-bottom: 40px;
         }
 
-        .learn-btn {
-            background: #fff8e1;
-            color: #b71c1c;
-            border: 2px solid #b71c1c;
-            border-radius: 10px;
-            padding: 12px 24px;
+        .cta-btn {
+            background: #2962ff;
+            color: #fff;
+            border: none;
+            border-radius: 7px;
+            padding: 12px 28px;
             font-size: 1.1rem;
-            font-family: 'IM Fell English SC', serif;
             font-weight: 700;
             cursor: pointer;
             transition: background 0.2s, color 0.2s;
-            box-shadow: 0 2px 8px #2d160633;
         }
 
-        .learn-btn:hover {
-            background: #b71c1c;
-            color: #ffd700;
+        .cta-btn.secondary {
+            background: #fff;
+            color: #2962ff;
+            border: 2px solid #2962ff;
         }
 
-        .hero-image {
-            width: 420px;
-            height: 420px;
-            background: #fff8e1;
-            border: 4px solid #b71c1c;
-            border-radius: 22px;
-            display: flex;
-            align-items: center;
-            justify-content: center;
-            position: relative;
+        .cta-btn.secondary:hover {
+            background: #e3edff;
+        }
+
+        .cta-btn:hover {
+            background: #0039cb;
+        }
+
+        .screenshot {
+            width: 100%;
+            max-width: 700px;
+            border-radius: 18px;
+            box-shadow: 0 4px 32px #2962ff22;
             margin-top: 24px;
-            margin-bottom: 24px;
-            box-shadow: 0 4px 24px #2d1606aa;
-        }
-
-        .hero-image .img-placeholder {
-            width: 110px;
-            height: 110px;
-            border-radius: 50%;
-            background: #b71c1c;
+            background: #f8fafc;
             display: flex;
-            align-items: center;
             justify-content: center;
-            font-size: 3.5rem;
-            color: #ffd700;
-            border: 4px solid #ffd700;
-            box-shadow: 0 2px 8px #2d1606aa;
+            align-items: flex-start;
+            padding: 32px 0;
         }
-
-        .status-box {
-            position: absolute;
-            bottom: 24px;
-            left: 50%;
-            transform: translateX(-50%);
-            background: #6d4c41;
-            box-shadow: 0 2px 12px rgba(0, 0, 0, 0.15);
+        .demo-window {
+            width: 95%;
+            max-width: 420px;
+            background: #fff;
             border-radius: 14px;
-            padding: 12px 28px;
+            box-shadow: 0 2px 16px #2962ff22;
+            overflow: hidden;
+            border: 1px solid #e3edff;
+            font-family: 'Inter', Arial, sans-serif;
+        }
+        .demo-header {
             display: flex;
             align-items: center;
-            gap: 10px;
-            font-size: 1.1rem;
-            font-family: 'IM Fell English SC', serif;
-            font-weight: 700;
-            color: #ffd700;
-            border: 2px solid #ffd700;
-            text-shadow: 1px 1px 0 #2d1606;
+            background: #f4f8ff;
+            padding: 10px 18px;
+            border-bottom: 1px solid #e3edff;
+            position: relative;
         }
-
-        .status-dot {
-            width: 14px;
-            height: 14px;
-            background: #43a047;
+        .demo-dot {
+            width: 10px;
+            height: 10px;
             border-radius: 50%;
             display: inline-block;
-            border: 2px solid #ffd700;
-            margin-right: 4px;
+            margin-right: 6px;
         }
-
-        @media (max-width: 1100px) {
-            .main {
-                flex-direction: column;
-                align-items: center;
+        .demo-dot.red { background: #ff5f56; }
+        .demo-dot.yellow { background: #ffbd2e; }
+        .demo-dot.green { background: #27c93f; }
+        .demo-title {
+            font-weight: 600;
+            color: #2962ff;
+            font-size: 1rem;
+            margin-left: 18px;
+        }
+        .demo-chat {
+            padding: 22px 18px 18px 18px;
+            background: #f8fafc;
+            min-height: 180px;
+        }
+        .chat-bubble {
+            margin-bottom: 18px;
+            max-width: 90%;
+        }
+        .chat-bubble.user {
+            align-self: flex-end;
+            background: #e3edff;
+            border-radius: 12px 12px 4px 12px;
+            padding: 12px 16px;
+            color: #1a237e;
+            margin-left: auto;
+            box-shadow: 0 1px 4px #2962ff11;
+        }
+        .chat-bubble.ai {
+            align-self: flex-start;
+            background: #2962ff;
+            border-radius: 12px 12px 12px 4px;
+            padding: 12px 16px;
+            color: #fff;
+            margin-right: auto;
+            box-shadow: 0 1px 4px #2962ff22;
+        }
+        .chat-label {
+            font-size: 0.85rem;
+            font-weight: 600;
+            margin-bottom: 4px;
+            opacity: 0.7;
+        }
+        .chat-msg {
+            font-size: 1rem;
+            line-height: 1.5;
+        }
+        @media (max-width: 900px) {
+            .hero-title {
+                font-size: 2rem;
             }
-
-            .hero-text {
-                margin-right: 0;
-                margin-bottom: 32px;
-                text-align: center;
+            .main {
+                padding-top: 32px;
             }
         }
 
         @media (max-width: 600px) {
             .header {
                 flex-direction: column;
-                gap: 12px;
-                padding: 18px 8px 10px 8px;
+                gap: 10px;
+                padding: 12px 8px;
             }
-
             .main {
-                padding: 24px 0 0 0;
+                padding: 18px 0 0 0;
             }
-
             .hero-title {
-                font-size: 1.5rem;
+                font-size: 1.3rem;
             }
-
-            .hero-image {
-                width: 90vw;
-                height: 220px;
+            .screenshot {
+                padding: 12px 0;
+            }
+            .demo-window {
+                max-width: 98vw;
             }
         }
     </style>
@@ -266,35 +266,44 @@
 
 <body>
     <header class="header">
-        <a href="#" class="logo"><span class="logo-shield">&#9876;</span>DungeonMaster AI</a>
+        <a href="#" class="logo"><span class="logo-icon">🤖</span>DS AI Assistant</a>
         <nav class="nav">
             <a href="#features">Features</a>
-            <a href="#demo">Demo</a>
-            <a href="#faq">FAQ</a>
-            <button class="start-btn">Begin Your Quest</button>
+            <a href="#workflows">Workflows</a>
+            <a href="#examples">Examples</a>
+            <button class="start-btn">Start Analyzing</button>
         </nav>
     </header>
     <main class="main">
-        <section class="hero-text">
-            <div class="badge">Your Virtual Dungeon Master</div>
-            <h1 class="hero-title">Embark on Epic Adventures with DungeonMaster AI</h1>
-            <div class="hero-desc">
-                Step into a world of fantasy! DungeonMaster AI is your ever-ready guide to thrilling quests, mysterious dungeons, and legendary tales. Whether you seek to craft a campaign, resolve a rule, or narrate a story, your AI Dungeon Master awaits to bring your tabletop RPG dreams to life.
+        <div class="badge">Built for Data Scientists</div>
+        <h1 class="hero-title">Your Personal <span class="highlight">Data Science</span><br>AI Assistant</h1>
+        <div class="hero-desc">
+            Accelerate your data science workflow with an AI assistant that understands statistics, machine learning, and data analysis. Get instant help with code, concepts, and complex analytical challenges.
+        </div>
+        <div class="cta-group">
+            <button class="cta-btn">Start Coding →</button>
+            <button class="cta-btn secondary">See Examples</button>
+        </div>
+        <div class="screenshot">
+            <div class="demo-window">
+                <div class="demo-header">
+                    <span class="demo-dot red"></span>
+                    <span class="demo-dot yellow"></span>
+                    <span class="demo-dot green"></span>
+                    <span class="demo-title">DS Assistant Chat</span>
+                </div>
+                <div class="demo-chat">
+                    <div class="chat-bubble user">
+                        <div class="chat-label">You</div>
+                        <div class="chat-msg">Help me debug this pandas groupby operation that's giving unexpected results</div>
+                    </div>
+                    <div class="chat-bubble ai">
+                        <div class="chat-label">DS AI Assistant</div>
+                        <div class="chat-msg">I'd be happy to help debug your pandas groupby! Can you share the code and describe what you expected vs. what you're getting? Common issues include column naming, aggregation functions, and data types.</div>
+                    </div>
+                </div>
             </div>
-            <div class="cta-group">
-                <button class="start-btn">Begin Your Quest</button>
-                <button class="learn-btn">Learn More</button>
-            </div>
-        </section>
-        <section class="hero-image">
-            <div class="img-placeholder">
-                <span title="Dungeon Master">&#9917;</span>
-            </div>
-            <div class="status-box">
-                <span class="status-dot"></span>
-                Dungeon Master is online
-            </div>
-        </section>
+        </div>
     </main>
 </body>
 
