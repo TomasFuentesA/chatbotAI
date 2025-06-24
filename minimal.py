@@ -8,116 +8,10 @@ import argparse
 from together import Together
 import textwrap
 import pandas as pd
-import numpy as np
 from datetime import datetime
 import os
 from pathlib import Path
 
-def perform_eda(data, file_path):
-    """
-    Perform Exploratory Data Analysis on the dataset
-    Returns a dictionary with various EDA metrics
-    """
-    eda_results = {}
-    
-    # Basic information
-    eda_results['file_name'] = os.path.basename(file_path)
-    eda_results['timestamp'] = datetime.now().strftime('%Y-%m-%d %H:%M:%S')
-    eda_results['total_rows'] = len(data)
-    eda_results['total_columns'] = len(data.columns)
-    
-    # Column information
-    column_info = {}
-    for col in data.columns:
-        col_info = {}
-        col_info['dtype'] = str(data[col].dtype)
-        col_info['missing_values'] = data[col].isnull().sum()
-        col_info['missing_percentage'] = (data[col].isnull().sum() / len(data)) * 100
-        
-        if pd.api.types.is_numeric_dtype(data[col]):
-            col_info['mean'] = data[col].mean()
-            col_info['std'] = data[col].std()
-            col_info['min'] = data[col].min()
-            col_info['max'] = data[col].max()
-            col_info['unique_values'] = data[col].nunique()
-        else:
-            col_info['unique_values'] = data[col].nunique()
-            col_info['most_common'] = data[col].mode().iloc[0] if not data[col].mode().empty else None
-            col_info['most_common_count'] = data[col].value_counts().iloc[0] if not data[col].value_counts().empty else 0
-        
-        column_info[col] = col_info
-    
-    eda_results['column_info'] = column_info
-    
-    # Correlation matrix for numeric columns
-    numeric_cols = data.select_dtypes(include=[np.number]).columns
-    if len(numeric_cols) > 1:
-        eda_results['correlation_matrix'] = data[numeric_cols].corr().to_dict()
-    
-    return eda_results
-
-def save_eda_results(eda_results, output_dir='results'):
-    """
-    Save EDA results to a markdown file
-    """
-    # Create results directory if it doesn't exist
-    Path(output_dir).mkdir(parents=True, exist_ok=True)
-    
-    # Create timestamp for filename
-    timestamp = datetime.now().strftime('%Y%m%d_%H%M%S')
-    output_file = os.path.join(output_dir, f'eda_summary_{timestamp}.md')
-    
-    # Start building markdown content
-    md_content = f"# Dataset Analysis Summary\n*Analysis performed on: {eda_results['timestamp']}*\n\n"
-    
-    # Dataset Overview
-    md_content += "## Dataset Overview\n"
-    md_content += f"- **Total Rows:** {eda_results['total_rows']}\n"
-    md_content += f"- **Total Columns:** {eda_results['total_columns']}\n\n"
-    
-    # Column Analysis
-    md_content += "## Column Analysis\n\n"
-    
-    for col, info in eda_results['column_info'].items():
-        md_content += f"### {col}\n"
-        md_content += f"- **Type:** {info['dtype']}\n"
-        md_content += f"- **Missing Values:** {info['missing_percentage']:.1f}%\n"
-        md_content += f"- **Unique Values:** {info['unique_values']}\n"
-        
-        if 'mean' in info:
-            md_content += "- **Statistics:**\n"
-            md_content += f"  - Mean: {info['mean']:.2f}\n"
-            md_content += f"  - Std Dev: {info['std']:.2f}\n"
-            md_content += f"  - Min: {info['min']}\n"
-            md_content += f"  - Max: {info['max']}\n"
-        else:
-            if info['most_common'] is not None:
-                md_content += f"- **Most Common:** {info['most_common']} ({info['most_common_count']} occurrences)\n"
-        
-        md_content += "\n"
-    
-    # Write to file
-    with open(output_file, 'w', encoding='utf-8') as f:
-        f.write(md_content)
-    
-    return output_file
-
-def load_data(file_path):
-    """
-    Load data from file (supports CSV and text files)
-    """
-    try:
-        if file_path.endswith('.csv'):
-            return pd.read_csv(file_path)
-        else:
-            # Try to read as CSV first, if that fails, read as text
-            try:
-                return pd.read_csv(file_path)
-            except:
-                return pd.read_csv(file_path, sep='\t')
-    except Exception as e:
-        print(f"Error loading file: {str(e)}")
-        return None
 
 ## FUNCTION 1: This Allows Us to Prompt the AI MODEL
 # -------------------------------------------------
@@ -142,57 +36,95 @@ def prompt_llm(prompt, with_linebreak=False):
     else:
         return output
 
-def save_summary(summary, output_dir='results'):
+
+def summarize_data(data_path, n_rows=1000, output_dir="results"):
     """
-    Save the dataset summary to a text file
+    Reads the first n_rows of a CSV file, prepares a text summary, sends it to the LLM for summarization, and saves the LLM's summary to output_dir/dataset_summarize_{timestamp}.txt
     """
-    # Create results directory if it doesn't exist
+    try:
+        df = pd.read_csv(data_path, nrows=n_rows)
+    except Exception as e:
+        print(f"Error reading file: {e}")
+        return None
+
+    # Prepare a text summary for the LLM
+    summary_text = []
+    summary_text.append(f"File: {data_path}")
+    summary_text.append(f"Shape (sample): {df.shape}")
+    summary_text.append(f"Columns: {list(df.columns)}")
+    summary_text.append(f"\nData types:\n{df.dtypes}")
+    summary_text.append(f"\nFirst 3 rows:\n{df.head(3).to_string(index=False)}")
+    summary_text.append(f"\nBasic statistics:\n{df.describe(include='all').transpose().head(5).to_string()}\n")
+    summary_for_llm = '\n'.join([str(x) for x in summary_text])
+
+    # Prompt the LLM to summarize
+    prompt = f"""
+    Please provide a concise, human-friendly summary of the following dataset sample. Highlight the main characteristics, data types, and any interesting patterns you notice.\n\n{summary_for_llm}
+    """
+    llm_summary = prompt_llm(prompt)
+
+    # Save the LLM's summary
     Path(output_dir).mkdir(parents=True, exist_ok=True)
-    
-    # Create timestamp for filename
     timestamp = datetime.now().strftime('%Y%m%d_%H%M%S')
-    output_file = os.path.join(output_dir, f'dataset_summary_{timestamp}.txt')
-    
-    # Write to file
+    output_file = f"{output_dir}/dataset_summarize_{timestamp}.txt"
     with open(output_file, 'w', encoding='utf-8') as f:
-        f.write(summary)
-    
+        f.write(llm_summary)
+    print(f"Summary saved to {output_file}")
     return output_file
+
+
+def chat_with_scientist(data_path, n_rows=1000):
+    """
+    Interactive chat with the Data Scientist. The assistant can suggest analyses, models, and graphs for the dataset.
+    """
+    try:
+        df = pd.read_csv(data_path, nrows=n_rows)
+    except Exception as e:
+        print(f"Error reading file: {e}")
+        return
+
+    # Prepare context for the assistant
+    context = f"The dataset has {df.shape[0]} rows and {df.shape[1]} columns. Columns: {list(df.columns)}. Data types: {df.dtypes.to_dict()}"
+    print("\nWelcome to the DS Assistant Chat! Type your questions or type 'exit' to quit.")
+    print(f"\nContext: {context}\n")
+    print("You can ask for ideas, analysis, modeling, or visualization suggestions.")
+
+    while True:
+        user_input = input("\nYou: ")
+        if user_input.lower() in ['exit', 'quit']:
+            print("Goodbye!")
+            break
+        prompt = (
+            "You are a helpful Data Science assistant. "
+            "Given the following dataset context, suggest ideas for analysis, modeling, and visualization, or answer the user's question. "
+            f"\n\nContext: {context}\nUser: {user_input}\nAssistant:"
+        )
+        response = prompt_llm(prompt)
+        print(f"Assistant: {response}")
+
 
 if __name__ == "__main__":
     # args on which to run the script
     parser = argparse.ArgumentParser()
     parser.add_argument("-k", "--api_key", type=str, default=None)
-    parser.add_argument("-f", "--file", type=str, required=True, help="Path to the data file")
     args = parser.parse_args()
 
     # Get Client for your LLMs
     client = Together(api_key=args.api_key)
 
-    # Load and analyze data
-    data = load_data(args.file)
-    if data is not None:
-        print(f"\nAnalyzing file: {args.file}")
-        eda_results = perform_eda(data, args.file)
-        output_file = save_eda_results(eda_results)
-        print(f"\nEDA results saved to: {output_file}")
-        
-        # Generate summary using LLM
-        summary_prompt = f"""
-        Please analyze this dataset and provide a brief summary:
-        - File: {eda_results['file_name']}
-        - Rows: {eda_results['total_rows']}
-        - Columns: {eda_results['total_columns']}
-        - Column types: {', '.join([f"{col} ({info['dtype']})" for col, info in eda_results['column_info'].items()])}
-        """
-        summary = prompt_llm(summary_prompt)
-        print("\nDataset Summary:")
-        print(summary)
-        
-        # Save summary to text file
-        summary_file = save_summary(summary)
-        print(f"Dataset summary saved to: {summary_file}")
-    else:
-        print(f"Failed to load file: {args.file}")
-    
+
+    # Generate concept summaries
+    print("Generating concept summaries...")
+    summaries = summarize_data("data/ai_job_dataset.csv", n_rows=1000, output_dir="results")
+
+    # Save results to timestamped file (already done in summarize_data, so just use the returned path)
+    output_file = summaries  # summaries is the output file path
+
+    # Display results
+    print("\nGenerated Summaries:\n")
+    with open(output_file, 'r', encoding='utf-8') as f:
+        print(f.read())
     print("-" * 100)
+
+    # Start interactive chat
+    chat_with_scientist("data/ai_job_dataset.csv", n_rows=1000)
